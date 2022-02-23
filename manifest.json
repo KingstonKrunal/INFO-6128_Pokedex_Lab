@@ -2,6 +2,7 @@
   "name": "my-new-pwa",
   "short_name": "my-new-pwa",
   "start_url": "https://kingstonkrunal.github.io/INFO-6128_Pokedex_Lab/",
+  "scope": "https://kingstonkrunal.github.io/INFO-6128_Pokedex_Lab/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#fff",
