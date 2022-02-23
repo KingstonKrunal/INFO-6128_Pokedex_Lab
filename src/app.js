@@ -1,4 +1,11 @@
+const lazyRepeatList = document.createElement('ons-lazy-repeat');
+lazyRepeatList.id = "pokemonList";
+lazyRepeatList.style.textTransform = "capitalize";
+
 document.addEventListener('init', (e) => {
+
+    const onsList = document.getElementById('pokeList');
+    onsList.appendChild(lazyRepeatList);
 
     if (e.target.id === 'index') {
         e.target.querySelector('#pokemonList').onClick = () => {
@@ -8,7 +15,8 @@ document.addEventListener('init', (e) => {
 
         e.target.querySelector('#pokemonList').onclick = function (event) {
             // console.log(event.target.innerHTML);
-            document.querySelector('#navigator').pushPage('pokeData', {data: {title: event.target.innerHTML}}).then(r => {});
+            document.querySelector('#navigator').pushPage('pokeData', {data: {title: event.target.innerHTML}}).then(r => {
+            });
             //console.log(event.target.data.title)
             // document.querySelector('#pID').innerHTML =event.target.data.title;
         }
@@ -24,7 +32,7 @@ document.addEventListener('init', (e) => {
 
         async function getSecondApiData(url) {
             const data = await getApiData(url);
-            console.log("here:::"+data);
+            // console.log("here:::"+data);
 
             document.querySelector('#pokeImage').src = data.sprites.other.dream_world.front_default;
             document.querySelector('#name').innerHTML = data.name + " #" + data.game_indices[0].game_index;
@@ -72,7 +80,8 @@ document.addEventListener('init', (e) => {
         setTimeout(() => {
             document.querySelector('#loader').style.display = 'none';
             document.querySelector('#data').removeAttribute("hidden");
-            getFirstApiData(apiURL).then(r => {});
+            getFirstApiData(apiURL).then(r => {
+            });
         }, 1000);
     }
 });
@@ -95,7 +104,8 @@ ons.ready(() => {
         }
     }
 
-    getApi(apiURL).then(r => {});
+    getApi(apiURL).then(r => {
+    });
 
     function show(data) {
         let dataList = [];
@@ -105,7 +115,27 @@ ons.ready(() => {
             dataList += `<ons-list-item modifier="chevron" class="list-item--material__right" tappable>` + r.name + `</ons-list-item>`
         }
 
-        // Setting innerHTML as tab variable
-        document.getElementById("pokemonList").innerHTML = dataList;
+        lazyRepeatList.innerHTML = dataList;
+
+        // document.getElementById("pokemonList").innerHTML = dataList;
+    }
+});
+
+const navigator = document.querySelector('#navigator');
+
+const popPage = () => navigator.popPage();
+
+// Pad the history with an extra page so that we don't exit right away
+window.addEventListener('load', () => window.history.pushState({}, ''));
+
+// When the browser goes back a page, if our navigator has more than one page we pop the page and prevent the back event by adding a new page
+// Otherwise we trigger a second back event, because we padded the history we need to go back twice to exit the app.
+window.addEventListener('popstate', () => {
+    const {pages} = navigator;
+    if (pages && pages.length > 1) {
+        popPage();
+        window.history.pushState({}, '');
+    } else {
+        window.history.back();
     }
 });
