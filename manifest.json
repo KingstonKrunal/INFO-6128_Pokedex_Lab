@@ -1,6 +1,6 @@
 {
-  "name": "my-new-pwa",
-  "short_name": "my-new-pwa",
+  "name": "INFO-6128-Krunal_Shah-Pokedex",
+  "short_name": "INFO-6128-Krunal_Shah-Pokedex",
   "start_url": "https://kingstonkrunal.github.io/INFO-6128_Pokedex_Lab/",
   "scope": "https://kingstonkrunal.github.io/INFO-6128_Pokedex_Lab/",
   "display": "standalone",
