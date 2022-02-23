@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My New PWA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="theme-color" content="#000"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;900&display=swap" rel="stylesheet"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/icon.png"/>
+    <link rel="icon" type="image/png" href="assets/images/icon.png" sizes="32x32"/>
+    <link rel="icon" type="image/png" href="assets/images/icon.png" sizes="16x16"/>
+    <link rel="manifest" href="manifest.json"/>
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css"/>
+    <link rel="stylesheet" type="text/css" href="src/app.css"/>
+</head>
+
+<body>
+<ons-navigator swipeable id="navigator" page="index"></ons-navigator>
+
+<template id="index">
+    <ons-page id="index">
+        <ons-toolbar>
+            <div class="center">My Pokedox</div>
+        </ons-toolbar>
+
+        <ons-list>
+            <ons-list-header>POKEMON (FIRST 100)</ons-list-header>
+            <ons-lazy-repeat id="pokemonList" style="text-transform: capitalize"></ons-lazy-repeat>
+        </ons-list>
+    </ons-page>
+</template>
+
+<template id="pokeData">
+    <ons-page id="pokeData">
+        <ons-toolbar>
+            <div class="left">
+                <ons-back-button>Back</ons-back-button>
+            </div>
+            <div class="center" id="pokeDataTitle" style="text-transform: capitalize"></div>
+        </ons-toolbar>
+
+        <ons-card>
+            <div class="loader" id="loader"></div>
+
+
+            <div id="imageDiv">
+                <img id="pokeImage">
+            </div>
+
+            <div class="title card__title" id="name" style="text-transform: capitalize"></div>
+
+            <div class="content card--material" id="data" hidden>
+                <ons-list>
+                    <ons-list-header>Types</ons-list-header>
+                    <p id="type1"></p>
+                    <p id="type2"></p>
+                    <p id="type3"></p>
+                    <p id="type4"></p>
+
+                    <br>
+
+                    <ons-list-header>Stats</ons-list-header>
+
+                    <br>
+
+                    <div class="statsDisplay">
+                        <p>HP</p>
+                        <p id="effort1" class="effort"></p>
+                        <p id="baseStat1" class="base"></p>
+                    </div>
+
+                    <div class="statsDisplay">
+                        <p>Attack</p>
+                        <p id="effort2" class="effort"></p>
+                        <p id="baseStat2" class="base"></p>
+                    </div>
+
+                    <div class="statsDisplay">
+                        <p>Defence</p>
+                        <p id="effort3" class="effort"></p>
+                        <p id="baseStat3" class="base"></p>
+                    </div>
+
+                    <div class="statsDisplay">
+                        <p>Special Attack</p>
+                        <p id="effort4" class="effort"></p>
+                        <p id="baseStat4" class="base"></p>
+                    </div>
+
+                    <div class="statsDisplay">
+                        <p>Special Defence</p>
+                        <p id="effort5" class="effort"></p>
+                        <p id="baseStat5" class="base"></p>
+                    </div>
+
+                    <div class="statsDisplay">
+                        <p>Speed</p>
+                        <p id="effort6" class="effort"></p>
+                        <p id="baseStat6" class="base"></p>
+                    </div>
+                </ons-list>
+            </div>
+        </ons-card>
+    </ons-page>
+    </ons-page>
+</template>
+</body>
+
+<script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+<script src="src/app.js"></script>
+<script type="text/javascript">
+    const registerSW = async () => {
+        if ("serviceWorker" in navigator) {
+            try {
+                await navigator.serviceWorker.register(`${window.location.href}service-worker.js`);
+                console.log("Service Worker Registered");
+            } catch (e) {
+                console.error("Error registering Service Worker...", e);
+            }
+        }
+    };
+    registerSW();
+</script>
+</html>

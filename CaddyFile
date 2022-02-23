@@ -1,0 +1,10 @@
+{
+  http_port 3000
+  https_port 3001
+  auto_https disable_redirects
+  ocsp_stapling off
+  admin off
+}
+dev.localhost {
+  file_server
+}
